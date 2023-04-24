@@ -18,6 +18,15 @@ const addTask = async (newTask) => {
   return response.data;
 };
 
+const getallTasks = async () => {
+  setToken();
+  const config = {
+    headers: { Authorization: token },
+  };
+  const response = await axios.get(`${baseUrl}/alltasks`, config);
+  return response.data;
+};
+
 const getUsersofTask = async (id) => {
   setToken();
   const config = {
@@ -27,4 +36,4 @@ const getUsersofTask = async (id) => {
   return response.data;
 };
 
-export default { addTask, setToken, getUsersofTask };
+export default { addTask, setToken, getUsersofTask, getallTasks };

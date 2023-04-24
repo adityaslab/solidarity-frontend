@@ -20,4 +20,18 @@ const getTasksofUser = async () => {
   return response.data;
 };
 
-export default { getTasksofUser };
+const joinTask = async (taskId) => {
+  setToken();
+  const config = {
+    headers: { Authorization: token },
+  };
+  console.log("here ", taskId);
+  const response = await axios
+    .post(`${baseUrl}/joinTask/${taskId}`, null, config)
+    .then((res) => {
+      return JSON.stringify(res.data);
+    });
+  return response;
+};
+
+export default { getTasksofUser, joinTask };

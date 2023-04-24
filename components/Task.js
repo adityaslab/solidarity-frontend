@@ -1,10 +1,21 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { BiDotsHorizontalRounded } from "react-icons/bi";
-import ImageProfile from "./ImageProfile";
 import Users from "./Users";
+import uService from "@/services/userservice";
 
-const Task = ({ taskId, taskName, status, priority, users }) => {
+const Task = ({ taskId, taskName, status, priority }) => {
+  const jointask = async (id) => {
+    try {
+      const response = await uService.joinTask(id);
+      console.log(response);
+      alert(response);
+      return response;
+    } catch (exception) {
+      console.log(exception);
+    }
+  };
+
   return (
     <div>
       <div className="flex flex-none flex-col p-2 mt-4 mb-4 rounded-large bg-white overflow-hidden w-64 h-40">
@@ -24,7 +35,15 @@ const Task = ({ taskId, taskName, status, priority, users }) => {
           </span>
         </div>
       </div>
-      <Users id={taskId} />
+      <div className="flex justify-between">
+        <Users id={taskId} />
+        <button className="text-3xl">✅</button>
+        <button className="text-3xl">❌</button>
+        <button className="text-3xl">📝</button>
+        <button onClick={() => jointask(taskId)} className="text-3xl">
+          ➕
+        </button>
+      </div>
     </div>
   );
 };
