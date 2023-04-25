@@ -1,11 +1,17 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import Task from './Task';
-import classNames from 'classnames';
-const TasksContainer = ({ title, titleBorder = false, tasks = [] }) => {
-  const titleClass = classNames('p-1', 'rounded-sm', {
-    'border-b-4': titleBorder,
-    'border-indigo-500': titleBorder,
+import React from "react";
+import PropTypes from "prop-types";
+import Task from "./Task";
+import classNames from "classnames";
+const TasksContainer = ({
+  show,
+  setShow,
+  title,
+  titleBorder = false,
+  tasks = [],
+}) => {
+  const titleClass = classNames("p-1", "rounded-sm", {
+    "border-b-4": titleBorder,
+    "border-indigo-500": titleBorder,
   });
 
   return (
@@ -17,7 +23,7 @@ const TasksContainer = ({ title, titleBorder = false, tasks = [] }) => {
       <div className="p-2 overflow-y-auto tasks--scrollbar">
         <div className="flex flex-col mx-2 p-1">
           {tasks.map((task, i) => (
-            <Task key={i} {...task} />
+            <Task show={show} setShow={setShow} key={i} {...task} />
           ))}
         </div>
       </div>

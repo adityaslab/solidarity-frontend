@@ -3,12 +3,34 @@ import PropTypes from "prop-types";
 import { BiDotsHorizontalRounded } from "react-icons/bi";
 import Users from "./Users";
 import uService from "@/services/userservice";
+import tService from "@/services/taskservice";
 
-const Task = ({ taskId, taskName, status, priority }) => {
+const Task = ({ show, setShow, taskId, taskName, status, priority }) => {
   const jointask = async (id) => {
     try {
       const response = await uService.joinTask(id);
-      console.log(response);
+      setShow(!show);
+      alert(response);
+      return response;
+    } catch (exception) {
+      console.log(exception);
+    }
+  };
+  const deleteTask = async (id) => {
+    try {
+      const response = await tService.removeTask(id);
+      setShow(!show);
+      alert(response);
+      return response;
+    } catch (exception) {
+      console.log(exception);
+    }
+  };
+
+  const markTaskCompleted = async (id) => {
+    try {
+      const response = await tService.markComplete(id);
+      setShow(!show);
       alert(response);
       return response;
     } catch (exception) {
@@ -37,8 +59,12 @@ const Task = ({ taskId, taskName, status, priority }) => {
       </div>
       <div className="flex justify-between">
         <Users id={taskId} />
-        <button className="text-3xl">✅</button>
-        <button className="text-3xl">❌</button>
+        <button onClick={() => markTaskCompleted(taskId)} className="text-3xl">
+          ✅
+        </button>
+        <button onClick={() => deleteTask(taskId)} className="text-3xl">
+          ❌
+        </button>
         <button className="text-3xl">📝</button>
         <button onClick={() => jointask(taskId)} className="text-3xl">
           ➕

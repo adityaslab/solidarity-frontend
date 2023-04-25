@@ -16,7 +16,6 @@ const getTasksofUser = async () => {
     headers: { Authorization: token },
   };
   const response = await axios.get(`${baseUrl}/${id}/listTasks`, config);
-  console.log(response.data);
   return response.data;
 };
 
@@ -25,11 +24,10 @@ const joinTask = async (taskId) => {
   const config = {
     headers: { Authorization: token },
   };
-  console.log("here ", taskId);
   const response = await axios
     .post(`${baseUrl}/joinTask/${taskId}`, null, config)
     .then((res) => {
-      return JSON.stringify(res.data);
+      return res.data;
     });
   return response;
 };

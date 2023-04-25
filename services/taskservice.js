@@ -18,6 +18,33 @@ const addTask = async (newTask) => {
   return response.data;
 };
 
+const removeTask = async (taskId) => {
+  setToken();
+  const config = {
+    headers: { Authorization: token },
+  };
+  console.log(JSON.stringify(config));
+  const response = await axios
+    .delete(`${baseUrl}/removeTask/${taskId}`, config)
+    .then((res) => {
+      return res.data;
+    });
+  return response;
+};
+
+const markComplete = async (userId) => {
+  setToken();
+  const config = {
+    headers: { Authorization: token },
+  };
+  const response = axios
+    .put(`${baseUrl}/markComplete/${userId}`, null, config)
+    .then((res) => {
+      return res.data;
+    });
+  return response;
+};
+
 const getallTasks = async () => {
   setToken();
   const config = {
@@ -36,4 +63,11 @@ const getUsersofTask = async (id) => {
   return response.data;
 };
 
-export default { addTask, setToken, getUsersofTask, getallTasks };
+export default {
+  addTask,
+  setToken,
+  getUsersofTask,
+  getallTasks,
+  removeTask,
+  markComplete,
+};
