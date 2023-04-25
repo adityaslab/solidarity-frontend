@@ -24,7 +24,13 @@ export default function page() {
       },
       onSubmit: (values) => {
         alert(JSON.stringify(values, null, 2));
-        register(values);
+        if (values.role === "Admin") {
+          const changedValues = { ...values, role: "A" };
+          register(changedValues);
+        } else {
+          const changedValues = { ...values, role: "U" };
+          register(changedValues);
+        }
       },
     });
 
@@ -82,14 +88,17 @@ export default function page() {
             Role
             <br />
           </label>
-          <input
-            className="input input-bordered w-full max-w-xs"
+          <select
+            className="select w-max max-w-xs"
             id="role"
             name="role"
-            type="text"
+            type="role"
             onChange={formik.handleChange}
             value={formik.values.role}
-          />
+          >
+            <option>User</option>
+            <option>Admin</option>
+          </select>
         </div>
         <div className="grid place-items-center pt-4">
           <button className="btn" type="submit">

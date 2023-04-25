@@ -18,8 +18,8 @@ export default function addTask(values) {
       initialValues: {
         taskName: "",
         description: "",
-        status: "",
-        priority: "",
+        status: "pending",
+        priority: "high",
       },
       onSubmit: (values) => {
         alert(JSON.stringify(values, null, 2));
@@ -28,7 +28,7 @@ export default function addTask(values) {
     });
 
     return (
-      <form className="grid grid flow row" onSubmit={formik.handleSubmit}>
+      <form className="grid flow row" onSubmit={formik.handleSubmit}>
         <div>
           <label htmlFor="taskName">Task Name</label>
           <input
@@ -55,27 +55,35 @@ export default function addTask(values) {
           <label htmlFor="status">status</label>
         </div>
         <div>
-          <input
-            className="input input-bordered w-full max-w-xs"
+          <select
+            className="select w-max max-w-xs"
             id="status"
             name="status"
-            type="status"
+            type="select"
             onChange={formik.handleChange}
             value={formik.values.status}
-          />
+          >
+            <option>pending</option>
+            <option>inprogress</option>
+            <option>completed</option>
+          </select>
         </div>
         <div>
           <label htmlFor="priority">priority</label>
         </div>
         <div>
-          <input
-            className="input input-bordered w-full max-w-xs"
+          <select
+            className="select w-max max-w-xs"
             id="priority"
             name="priority"
-            type="priority"
+            type="select"
             onChange={formik.handleChange}
             value={formik.values.priority}
-          />
+          >
+            <option>high</option>
+            <option>medium</option>
+            <option>low</option>
+          </select>
         </div>
         <div className="grid place-items-center pt-4">
           <button className="btn" type="submit">

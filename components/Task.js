@@ -4,8 +4,17 @@ import { BiDotsHorizontalRounded } from "react-icons/bi";
 import Users from "./Users";
 import uService from "@/services/userservice";
 import tService from "@/services/taskservice";
+import colorPriority from "@/assets/colorPriority";
 
-const Task = ({ show, setShow, taskId, taskName, status, priority }) => {
+const Task = ({
+  show,
+  setShow,
+  taskId,
+  taskName,
+  description,
+  status,
+  priority,
+}) => {
   const jointask = async (id) => {
     try {
       const response = await uService.joinTask(id);
@@ -42,16 +51,19 @@ const Task = ({ show, setShow, taskId, taskName, status, priority }) => {
     <div>
       <div className="flex flex-none flex-col p-2 mt-4 mb-4 rounded-large bg-white overflow-hidden w-64 h-40">
         <div className="flex items-center">
-          <span className={`rounded-full w-2 h-2 bg-yellow-500 `}></span>
+          <span
+            className={`rounded-full w-2 h-2 bg-yellow-500 ${colorPriority(
+              priority
+            )}`}
+          ></span>
           <span className="ml-2 text-sm">{priority}</span>
         </div>
         <div className="mt-2">
           <p className="text-lg font-bold">{taskName}</p>
         </div>
+        <p>{description}</p>
 
         <div className=" flex mt-3 justify-between">
-          <div className="flex ml-3 justify between">time</div>
-
           <span className="flex text-gray-800 items-center">
             <BiDotsHorizontalRounded className="w-6 h-6" />
           </span>

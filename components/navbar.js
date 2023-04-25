@@ -9,11 +9,10 @@ const Navbar = ({ setLogout }) => {
       </div>
       <div className="avatar">
         <div className="w-24 rounded-full">
-          <Image src={ico} />
+          <Image src={ico} alt="" />
         </div>
       </div>
       <div className="flex-none">
-        <button className="btn btn-ghost">profile</button>
         <button onClick={() => setLogout(true)} className="btn btn-ghost">
           logout
         </button>

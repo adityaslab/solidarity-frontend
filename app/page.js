@@ -29,7 +29,7 @@ const LoginForm = (props) => {
             onChange={props.handlePasswordChange}
           />
         </div>
-        <div>
+        <div className="grid place-items-center pt-4">
           <button className="btn" type="submit">
             Login
           </button>
